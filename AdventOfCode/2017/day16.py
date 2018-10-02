@@ -1,3 +1,4 @@
+# Written by Danny Brown on September 30, 2018
 # https://adventofcode.com/2017/day/16
 
 def main():
