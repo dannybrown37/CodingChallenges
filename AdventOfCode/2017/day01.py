@@ -1,8 +1,9 @@
 # Advent of Code
-# Day 1 Part 2, Written on December 7, 2017 (whomp whomp), by Danny Brown
+# Day 1 Part 1, Written on December 7, 2017 (whomp whomp), by Danny Brown
 
-# This program reviews a sequence of digits and checks against a digit halfway
-# around the sequence. If the numbers match, they are added to the total.
+# This program reviews a sequence of digits (your puzzle input) and finds the
+# sum of all digits that match the next digit in the list. The list is circular,
+# so the digit after the last digit is the first digit in the list.
 
 sequence = ('649713959682898259577777982349515784822684939966191359164369933'
             '435366431847754488661965363557985166219358714739318371382388296'
@@ -39,23 +40,35 @@ sequence = ('649713959682898259577777982349515784822684939966191359164369933'
             '341626318866519144574571816535351149394735916975448425618171572'
             '917195165594323552199346814729617189679698944337146')
 
-test1 = '1212' # 6
-test2 = '1221' # 0
-test3 = '123425' # 4
-test4 = '123123' # 12
-test5 = '12131415' # 4
 
-def find_the_total(sequence):
-    total = 0
-    for digit in range(0, len(sequence)):
-        if digit < len(sequence)/2:
-            if sequence[digit] == sequence[digit + len(sequence)/2]:
+def part_one():
+    def find_the_total(sequence):
+        total = 0
+        for digit in range(1, len(sequence)):
+            if sequence[digit] == sequence[digit-1]:
                 total += int(sequence[digit])
-        elif digit >= len(sequence)/2:
-            if sequence[digit] == sequence[digit - len(sequence)/2]:
-                total += int(sequence[digit])
-    return total
+        if sequence[0]== sequence[len(sequence)-1]:
+            total += int(sequence[0])
+        return total
 
-answer = find_the_total(sequence)
-print answer
+    answer = find_the_total(sequence)
+    print answer
 
+
+def part_two():
+    def find_the_total(sequence):
+        total = 0
+        for digit in range(0, len(sequence)):
+            if digit < len(sequence)/2:
+                if sequence[digit] == sequence[digit + len(sequence)/2]:
+                    total += int(sequence[digit])
+            elif digit >= len(sequence)/2:
+                if sequence[digit] == sequence[digit - len(sequence)/2]:
+                    total += int(sequence[digit])
+        return total
+
+    answer = find_the_total(sequence)
+    print answer
+
+part_one()
+part_two()
