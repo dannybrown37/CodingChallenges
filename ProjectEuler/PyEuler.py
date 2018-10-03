@@ -1,5 +1,30 @@
 def main():
-    problem_4()
+    problem_5()
+
+
+def problem_5():
+    """
+    Smallest multiple
+    Problem 5
+    2520 is the smallest number that can be divided by each of the numbers
+    from 1 to 10 without any remainder.
+
+    What is the smallest positive number that is evenly divisible by all of
+    the numbers from 1 to 20?
+    """
+    answer = False
+    for x in range(2000000, 1000000000, 20):
+        if answer:
+            break
+        count = 0
+        for y in range(1, 21):
+            if x % y == 0:
+                count += 1
+                if count is 20:
+                    answer = x
+            else:
+                break
+    print "The answer is " + str(answer)
 
 
 def problem_4():
@@ -7,11 +32,28 @@ def problem_4():
     Largest palindrome product
     Problem 4
     A palindromic number reads the same both ways. The largest palindrome made
-    from the product of two 2-digit numbers is 9009 = 91 × 99.
+    from the product of two 2-digit numbers is 9009 = 91 x 99.
 
     Find the largest palindrome made from the product of two 3-digit numbers.
     """
-    pass
+    def is_palindrome(num):
+        num = str(num)
+        rev = num[::-1]
+        if num == rev:
+            return True
+        else:
+            return False
+
+    largest = 0
+    for x in range(100, 1000):
+        for y in range(100, 1000):
+            num = x * y
+            if is_palindrome(num) and num > largest:
+                largest = num
+            else:
+                pass
+
+    print largest
 
 
 def problem_3():
