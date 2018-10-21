@@ -1,5 +1,52 @@
 def main():
-    problem_8()
+    problem_10()
+
+# Miller-Rabin primarily checker (optimized algorithm)
+# Very thorough and academic essay on the subject:
+# https://programmingpraxis.files.wordpress.com/2012/09/primenumbers.pdf
+def is_prime(n):
+    if type(n) != int and type(n) != long:
+        raise TypeError("must be integer")
+    if n < 2:
+        return False
+    ps = [2,3,5,7,11,13,17,19,23,29,31,37,41,
+          43,47,53,59,61,67,71,73,79,83,89,97]
+    def is_spsp(n, a):
+        d, s = n-1, 0
+        while d%2 == 0:
+            d /= 2; s += 1
+        t = pow(a,d,n)
+        if t == 1:
+            return True
+        while s > 0:
+            if t == n-1:
+                return True
+            t = (t*t) % n
+            s -= 1
+        return False
+    if n in ps:
+        return True
+    for p in ps:
+        if not is_spsp(n,p):
+            return False
+    return True
+
+
+
+def problem_10():
+    """
+    Summation of primes
+    Problem 10
+    The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
+
+    Find the sum of all the primes below two million.
+    """
+    total = 2
+    for x in xrange(3, 2000000, 2):
+        prime = is_prime(x)
+        if prime:
+            total += x
+    print total
 
 
 def problem_8():
